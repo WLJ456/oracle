@@ -15,7 +15,7 @@
   
   ![创建角色](./img/system.png)
   
-  分析：用system用户登录到数据库，首先用create语句创建角色；之后用grant 将 connect,resource授权给con_res_wlj角色；然后创建wlj用户并分配空间；最后将角色的权限授权给创建的用户。
+  分析：用system用户登录到数据库，首先用create语句创建角色；之后用grant 将 connect,resource授权给con_res_wlj角色,RESOURCE:拥有Resource权限的用户只可以创建实体，不可以创建数据库结构。CONNECT：拥有Connect权限的用户只可以登录Oracle，不可以创建实体，不可以创建数据库结构。然后创建wlj用户并分配空间；最后将角色的权限授权给创建的用户。
   
   
   
