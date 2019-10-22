@@ -239,7 +239,7 @@ end;
     
 综合分析：orders（订单表）和order_details（订单详表），两个表通过列order_id建立主外键关联。orders表按范围分区进行存储，order_details使用引用分区进行存储。BUFFER_POOL子句可指定一个数据库对象的默认缓冲池。这个对象的所有数据块存储在指定的缓存中。DEFAULT ——指定DEFAULT将适用默认的缓冲池。这个选项适用于没有分配给KEEP缓冲池和RECYCLE缓冲池的其它数据库对象。同时在建表时运用IniTrans，来处理每个块中行级锁事务。这次实验表中的数据量很大，查询数据的速度就会变慢，应用程序的性能就会下降，所以我们对表进行分区。表进行分区后，逻辑上表仍然是一张完整的表，只是将表中的数据在物理上存放到多个表空间(物理文件上)，这样查询数据时，不至于每次都扫描整张表。所以本次使用分为三张表的目的便是如此。用NOCOMPRESS NO INMEMORY语句来缓解了内存资源的压力，这就将有限的资源分配给更需要的用户，增加了数据库资源的利用率。
     
- -执行查询计划
+-执行查询计划
 ```
 select * from your_user.orders where order_date
 between to_date('2017-1-1','yyyy-mm-dd') and to_date('2018-6-1','yyyy-mm-dd');
